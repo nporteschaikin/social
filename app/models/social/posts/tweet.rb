@@ -5,11 +5,7 @@ module Social
 			validates :tid, presence: true
 			validates :tweet, presence: true
 			
-			attr_accessor :published_at
-			
-			after_save do
-				Social::Post.create post: self, published_at: self.published_at
-			end
+			include Social::Posts::Create
 
 			def self.import
 				client = Twitter::Client.new consumer_key: Social::Engine.config.twitter_consumer_key, consumer_secret: Social::Engine.config.twitter_consumer_secret

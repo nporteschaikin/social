@@ -5,11 +5,7 @@ module Social
 				validates :iid, presence: true
 				has_attached_file :photo
 				
-				attr_accessor :published_at
-
-				after_save do
-					Social::Post.create post: self, published_at: self.published_at
-				end
+				include Social::Posts::Create
 
 				def self.import
 					client = Social::Engine::Instagram::Client.new client_id: Social::Engine.config.instagram_client_id, client_secret: Social::Engine.config.instagram_client_secret, access_token: Social::Engine.config.instagram_access_token

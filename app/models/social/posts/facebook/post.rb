@@ -8,12 +8,10 @@ module Social
 				validates :fid, presence: true
 				attr_accessor :object
 				
-				after_save do
-					Social::Post.create post: self, published_at: self.object.created_time
-				end
+				include Social::Posts::Create
 				
 				before_validation do
-
+					
 					case object.type
 						when "status"
 							return false if object.message.nil?
@@ -25,7 +23,8 @@ module Social
 						else
 							return false
 					end
-
+					self.published_at = object.created_time
+					
 				end
 				
 			end
