@@ -4,7 +4,7 @@ module Social
 			module Posts
 				class Photo < ActiveRecord::Base
 					
-					attr_accessible :photo
+					attr_accessible :photo, :caption
 					has_attached_file :photo # todo: add styles and validators
 
 				end
