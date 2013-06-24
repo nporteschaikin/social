@@ -2,7 +2,7 @@ module Social
 	module Posts
 		class Instagram < ActiveRecord::Base
 				
-				attr_accessible :instagram_id
+				attr_accessible :instagram_id, :photo
 				
 				validates :instagram_id, presence: true
 				has_attached_file :photo
