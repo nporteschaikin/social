@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
 	s.add_dependency "twitter"
 	s.add_dependency "instagram"
 	s.add_dependency "paperclip"
+	s.add_dependency "protected_attributes" if Rails.version >= '4.0'
 
 	s.add_development_dependency "sqlite3"
 end
