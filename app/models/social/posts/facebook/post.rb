@@ -11,20 +11,22 @@ module Social
 				include Social::Posts::Create
 				
 				before_validation do
-					
-					case object.type
-						when "status"
-							return false if object.message.nil?
-							self.post = Facebook::Posts::Status.create message: object.message
-						when "photo"
-							self.post = Facebook::Posts::Photo.create photo: URI.parse(object.picture), caption: object.message
-						when "link"
-							self.post = Facebook::Posts::Link.create link: object.link, icon: URI.parse(object.icon), message: object.message
-						else
-							return false
+					if Social::Engine.config.facebook_enabled
+						case object.type
+							when "status"
+								return false if object.message.nil?
+								self.post = Facebook::Posts::Status.create message: object.message
+							when "photo"
+								self.post = Facebook::Posts::Photo.create photo: URI.parse(object.picture), caption: object.message
+							when "link"
+								self.post = Facebook::Posts::Link.create link: object.link, icon: URI.parse(object.icon), message: object.message
+							else
+								return false
+						end
+						self.published_at = object.created_time
+					else
+						return false
 					end
-					self.published_at = object.created_time
-					
 				end
 				
 			end

@@ -8,9 +8,14 @@ module Social
 			include Social::Posts::Create
 
 			def self.import
-				tweets = Twitter.user_timeline Social::Engine.config.twitter_username
-				tweets.each do |tweet|
-					self.find_or_create_by(twitter_id: tweet.id) { |p| p.tweet = tweet.text; p.published_at = tweet.created_at }
+				if Social::Engine.config.twitter_enabled
+					client = Twitter::Client.new consumer_key: Social::Engine.config.twitter_consumer_key, consumer_secret: Social::Engine.config.twitter_consumer_secret
+					tweets = client.user_timeline Social::Engine.config.twitter_username
+					tweets.each do |tweet|
+						self.find_or_create_by(twitter_id: tweet.id) { |p| p.tweet = tweet.text; p.published_at = tweet.created_at }
+					end
+				else
+					return false
 				end
 			end
 
