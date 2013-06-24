@@ -1,7 +1,9 @@
 module Social
 	module Posts
 		class Tweet < ActiveRecord::Base
-
+			
+			attr_accessible :twitter_id, :tweet
+			
 			validates :twitter_id, presence: true
 			validates :tweet, presence: true
 			

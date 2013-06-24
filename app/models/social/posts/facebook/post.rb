@@ -3,6 +3,8 @@ module Social
 		module Facebook
 			class Post < ActiveRecord::Base
 				
+				attr_accessible :facebook_id
+				
 				default_scope { includes(:post) }
 				belongs_to :post, polymorphic: true
 				validates :facebook_id, presence: true
