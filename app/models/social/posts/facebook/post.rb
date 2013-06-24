@@ -5,7 +5,7 @@ module Social
 				
 				default_scope { includes(:post) }
 				belongs_to :post, polymorphic: true
-				validates :fid, presence: true
+				validates :facebook_id, presence: true
 				attr_accessor :object
 				
 				include Social::Posts::Create

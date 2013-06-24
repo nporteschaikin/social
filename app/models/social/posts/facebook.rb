@@ -10,7 +10,7 @@ module Social
 				api = Koala::Facebook::API.new(Koala::Facebook::OAuth.new(Social::Engine.config.facebook_app_id, Social::Engine.config.facebook_app_secret).get_app_access_token)
 				posts = api.get_connections(Social::Engine.config.facebook_page, "posts")
 				posts.each do |post|
-					create = Facebook::Post.find_or_create_by(fid: post['id']) { |p| p.object = OpenStruct.new(post) }
+					create = Facebook::Post.find_or_create_by(facebook_id: post['id']) { |p| p.object = OpenStruct.new(post) }
 				end
 			end
 
