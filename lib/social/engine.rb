@@ -4,6 +4,7 @@ module Social
 		
 		require 'koala'
 		require 'twitter'
+		require 'instagram'
 		require 'paperclip'
 		
 	end
