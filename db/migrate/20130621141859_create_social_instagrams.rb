@@ -1,7 +1,7 @@
 class CreateSocialInstagrams < ActiveRecord::Migration
   def change
     create_table :social_instagrams do |t|
-      t.string :iid
+      t.string :instagram_id
       t.attachment :photo
     end
   end
