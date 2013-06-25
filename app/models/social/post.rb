@@ -7,6 +7,10 @@ module Social
 		default_scope { order('published_at DESC') }
 		belongs_to :post, polymorphic: true
 		
+		def network
+			self.post.class.network
+		end
+		
 		def self.import
 			Posts::Facebook.import
 			Posts::Tweet.import
