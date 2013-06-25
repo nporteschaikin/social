@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
 	s.add_dependency "rails", ">= 3.2.13"
 	s.add_dependency "koala"
-	s.add_dependency "twitter"
+	s.add_dependency "twitter", ">= 4.8.1"
 	s.add_dependency "instagram"
 	s.add_dependency "paperclip"
 
