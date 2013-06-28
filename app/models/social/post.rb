@@ -11,6 +11,12 @@ module Social
 			self.post.class.network
 		end
 		
+		def photo
+			self.post.post.photo if defined?(self.post.post.photo)
+			self.post.photo if defined?(self.post.photo)
+			return false
+		end
+		
 		def self.import
 			Posts::Facebook.import
 			Posts::Tweet.import
