@@ -14,7 +14,6 @@ module Social
 		def photo
 			self.post.post.photo if defined?(self.post.post.photo)
 			self.post.photo if defined?(self.post.photo)
-			false
 		end
 		
 		def self.import
