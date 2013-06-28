@@ -18,7 +18,6 @@ module Social
 				
 				before_validation do
 					if Social::Engine.config.facebook_enabled
-						return false
 						case object['type']
 							when "status"
 								return false if object['message'].nil?

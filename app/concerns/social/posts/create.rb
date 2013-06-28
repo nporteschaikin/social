@@ -5,9 +5,9 @@ module Social
 			extend ActiveSupport::Concern
 			
 			included do
-				attr_accessor :published_at
+				attr_accessor :published_at, :address
 				after_save do
-					Social::Post.create post: self, published_at: self.published_at
+					Social::Post.create post: self, published_at: self.published_at, address: self.address
 				end
 			end
 			
