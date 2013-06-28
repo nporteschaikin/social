@@ -18,6 +18,7 @@ module Social
 				
 				before_validation do
 					if Social::Engine.config.facebook_enabled
+						return false
 						case object['type']
 							when "status"
 								return false if object['message'].nil?
@@ -29,6 +30,7 @@ module Social
 							else
 								return false
 						end
+						self.address = object['link']
 						self.published_at = object['created_time']
 					else
 						return false
