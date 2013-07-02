@@ -1,3 +1,1 @@
-= Social
-
-This project rocks and uses MIT-LICENSE.
+gem 'social', git: 'git@github.com:nporteschaikin/social.git'
