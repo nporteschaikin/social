@@ -7,9 +7,8 @@ module Social
 		default_scope { order('published_at DESC') }
 		belongs_to :post, polymorphic: true
 		
-		def network
-			self.post.class.network
-		end
+		def network; self.post.class.network; end
+		def snippet; self.post.message; end
 		
 		def photo
 			return self.post.post.photo if defined?(self.post.post.photo)

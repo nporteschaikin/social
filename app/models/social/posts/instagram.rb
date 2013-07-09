@@ -9,9 +9,8 @@ module Social
 				
 				include Social::Posts::Create
 				
-				def self.network
-					"Instagram"
-				end
+				def self.network; "Instagram"; end
+				def snippet; self.caption; end
 				
 				def self.import
 					if Social::Engine.config.instagram_enabled

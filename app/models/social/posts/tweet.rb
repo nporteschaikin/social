@@ -9,9 +9,8 @@ module Social
 			
 			include Social::Posts::Create
 			
-			def self.network
-				"Twitter"
-			end
+			def self.network; "Twitter"; end
+			def snippet; self.tweet; end
 			
 			def self.import
 				if Social::Engine.config.twitter_enabled

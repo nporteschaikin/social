@@ -12,9 +12,8 @@ module Social
 				
 				include Social::Posts::Create
 				
-				def self.network
-					"Facebook"
-				end
+				def self.network; "Facebook"; end
+				def snippet; self.post.snippet; end
 				
 				before_validation do
 					if Social::Engine.config.facebook_enabled
