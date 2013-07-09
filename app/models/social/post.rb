@@ -8,7 +8,7 @@ module Social
 		belongs_to :post, polymorphic: true
 		
 		def network; self.post.class.network; end
-		def snippet; self.post.message; end
+		def snippet; self.post.snippet; end
 		
 		def photo
 			return self.post.post.photo if defined?(self.post.post.photo)
