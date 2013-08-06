@@ -7,7 +7,7 @@ module Social
 		require 'instagram'
 		require 'paperclip'
 		require 'tumblr_client'
-		# require 'protected_attributes' if Rails.version >= '4.0'
+		require 'protected_attributes' if Rails.version >= '4.0'
 		
 	end
 end
