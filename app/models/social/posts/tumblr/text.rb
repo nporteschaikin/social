@@ -5,7 +5,7 @@ module Social
 				
 				def snippet; self.body; end
 				
-				attr_accessible :title, :body
+				attr_accessible :title, :body, :more
 				
 			end
 		end
