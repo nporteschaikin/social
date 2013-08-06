@@ -19,7 +19,7 @@ module Social
 				when "photo"
 					self.post = Social::Posts::Tumblr::Photo.create photo: URI.parse(object["photos"].first["original_size"]["url"]), caption: object['caption']
 				when "text"
-					self.post = Social::Posts::Tumblr::Text.create body: object["body"], title: object["title"], more: object["post_url"]
+					self.post = Social::Posts::Tumblr::Text.create body: object["body"], title: object["title"]
 				when "quote"
 					self.post = Social::Posts::Tumblr::Quote.create body: object["text"], source: object["source"]
 				when "link"
