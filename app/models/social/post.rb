@@ -15,11 +15,5 @@ module Social
 			return self.post.photo if defined?(self.post.photo)
 		end
 		
-		def self.import
-			Posts::Facebook.import
-			Posts::Tweet.import
-			Posts::Instagram.import
-		end
-		
 	end
 end

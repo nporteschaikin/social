@@ -4,6 +4,7 @@ class CreateSocialFacebookLinks < ActiveRecord::Migration
       t.string :link
       t.attachment :icon
       t.text :message
+      t.timestamps
     end
   end
 end

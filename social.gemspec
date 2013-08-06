@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
 	s.add_dependency "twitter", ">= 4.8.1"
 	s.add_dependency "instagram"
 	s.add_dependency "paperclip"
+	s.add_dependency "tumblr_client"
 
 end
