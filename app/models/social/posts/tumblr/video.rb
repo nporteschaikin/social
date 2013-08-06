@@ -4,6 +4,7 @@ module Social
 			class Video < ActiveRecord::Base
 				
 				attr_accessible :embed
+				def snippet; nil; end
 				
 			end
 		end
