@@ -10,6 +10,7 @@ module Social
 			validates :tumblr_id, presence: true
 			validates :post, presence: true
 
+			include Social::Posts::UniversalAttributes
 			include Social::Posts::Create
 			
 			def snippet; self.post.snippet; end

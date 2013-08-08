@@ -4,6 +4,8 @@ class CreateSocialInstagrams < ActiveRecord::Migration
       t.string :instagram_id
       t.text :caption
       t.attachment :photo
+      t.datetime :published_at
+      t.string :address
     end
   end
 end

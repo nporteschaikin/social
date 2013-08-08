@@ -7,6 +7,7 @@ module Social
 			validates :instagram_id, presence: true
 			has_attached_file :photo
 			
+			include Social::Posts::UniversalAttributes
 			include Social::Posts::Create
 
 			def snippet; self.caption; end

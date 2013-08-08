@@ -7,6 +7,7 @@ module Social
 			validates :tweet_id, presence: true
 			validates :tweet, presence: true
 			
+			include Social::Posts::UniversalAttributes
 			include Social::Posts::Create
 			
 			def snippet; self.tweet; end

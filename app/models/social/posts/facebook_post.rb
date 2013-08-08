@@ -9,6 +9,7 @@ module Social
 			validates :facebook_id, presence: true
 			attr_accessor :object, :api
 
+			include Social::Posts::UniversalAttributes
 			include Social::Posts::Create
 
 			def snippet; self.post.snippet; end
