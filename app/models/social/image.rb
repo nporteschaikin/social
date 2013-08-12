@@ -3,7 +3,7 @@ module Social
 		
 		belongs_to :parent, polymorphic: true
 		attr_accessible :asset
-		has_attached_file :asset # to do: add styles
+		has_attached_file :asset, styles: { square: "700x500#" }
 		
 		validates :asset, presence: true
 		validates :parent, presence: true
