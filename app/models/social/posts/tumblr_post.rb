@@ -2,7 +2,7 @@ module Social
 	module Posts
 		class TumblrPost < ActiveRecord::Base
 
-			attr_accessible :tumblr_id
+			attr_accessible :tumblr_id, :object
 			attr_accessor :object
 
 			default_scope { includes(:post) }
@@ -16,6 +16,8 @@ module Social
 			def snippet; self.post.snippet; end
 			
 			before_validation do
+			  self.post.destroy if self.post
+			  puts object
 				case object["type"]
 				when "photo"
 					self.post = Social::Posts::Tumblr::Photo.create photo: URI.parse(object["photos"].first["original_size"]["url"]), caption: object['caption']
@@ -32,17 +34,21 @@ module Social
 				self.published_at = object["date"]
 			end
 			
+			
 			class << self
 				
 				def network; "Tumblr"; end
 				
+				def update_or_create(object)
+          obj = self.find_by_tumblr_id object["id"]
+          obj.nil? ? self.create(tumblr_id: post["id"], object: object) : obj.update_attributes(object: object)
+  			end
+  			
 				def import
 					if Social::Engine.config.tumblr_enabled
 						client = Social::Engine::Tumblr::Client.new consumer_key: Social::Engine.config.tumblr_consumer_key
 						posts = client.posts(Social::Engine.config.tumblr_address)["posts"]
-						posts.each do |post|
-							self.find_or_create_by_tumblr_id(post["id"]) { |x| x.object = post }
-						end
+						posts.each {|post| self.update_or_create(post) }
 					else
 						return false
 					end
