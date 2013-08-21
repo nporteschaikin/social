@@ -5,7 +5,7 @@ module Social
 			extend ActiveSupport::Concern
 			
 			included do
-				after_save do
+				after_create do
 					Social::Post.create post: self, published_at: self.published_at, address: self.address
 				end
 			end
