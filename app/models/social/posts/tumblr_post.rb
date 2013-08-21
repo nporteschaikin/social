@@ -41,7 +41,7 @@ module Social
 				
 				def update_or_create(object)
           obj = self.find_by_tumblr_id object["id"]
-          obj.nil? ? self.create(tumblr_id: post["id"], object: object) : obj.update_attributes(object: object)
+          obj.nil? ? self.create(tumblr_id: object["id"], object: object) : obj.update_attributes(object: object)
   			end
   			
 				def import
