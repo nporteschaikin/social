@@ -3,8 +3,6 @@ class CreateSocialTweets < ActiveRecord::Migration
     create_table :social_tweets do |t|
       t.string :tweet_id
       t.text :tweet
-      t.datetime :published_at
-      t.string :address
     end
   end
 end

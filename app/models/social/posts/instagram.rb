@@ -12,6 +12,13 @@ module Social
 
 			def snippet; self.caption; end
 			
+			after_save do
+			  puts self.parent
+			  self.caption.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).each do |t|
+			    self.parent.tag_relationships.create tag: Tag.find_or_create_by_name(t)
+		    end
+			end
+			
 			class << self
 				
 				def network; "Instagram"; end
@@ -22,7 +29,13 @@ module Social
 						uid = client.user_search(Social::Engine.config.instagram_username).first.id
 						photos = client.user_recent_media(uid)
 						photos.each do |photo|
-							self.find_or_create_by_instagram_id(photo.id) { |p| p.photo = URI.parse(photo.images.standard_resolution.url); p.caption = photo.caption ? photo.caption.text : nil; p.published_at = Time.at(Integer(photo.created_time)); p.address = photo.link }
+							self.find_or_create_by_instagram_id(photo.id) do |p|
+							  p.photo = URI.parse(photo.images.standard_resolution.url);
+							  p.caption = photo.caption ? photo.caption.text : nil;
+							  p.tags_found = photo.caption.to_s.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten
+							  p.published_at = Time.at(Integer(photo.created_time))
+							  p.address = photo.link
+							end
 						end
 					else
 						return false

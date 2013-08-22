@@ -1,7 +1,7 @@
 module Social
 	module Posts
 		class TumblrPost < ActiveRecord::Base
-
+      
 			attr_accessible :tumblr_id, :object
 			attr_accessor :object
 
@@ -17,7 +17,6 @@ module Social
 			
 			before_validation do
 			  self.post.destroy if self.post
-			  puts object
 				case object["type"]
 				when "photo"
 					self.post = Social::Posts::Tumblr::Photo.create photo: URI.parse(object["photos"].first["original_size"]["url"]), caption: object['caption']
@@ -30,6 +29,7 @@ module Social
 				when "video"
 					self.post = Social::Posts::Tumblr::Video.create embed: object["player"].first["embed_code"]
 				end
+				self.tags_found = object["tags"]
 				self.address = object["post_url"]
 				self.published_at = object["date"]
 			end
