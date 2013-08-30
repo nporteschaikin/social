@@ -7,7 +7,6 @@ module Social
   		included do
         has_many :tag_relationships, dependent: :destroy
         has_many :tags, through: :tag_relationships, source: :tag
-        
         attr_accessible :tags_found
         attr_accessor :tags_found
         
@@ -21,7 +20,7 @@ module Social
     	    end
 
     	    def popular_tags
-    	      unscoped.includes(:tags).collect {|x| x.tags }.flatten.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
+    	      scoped.includes(:tags).collect {|x| x.tags }.flatten.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
     	    end
     	  end
   		end
