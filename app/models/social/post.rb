@@ -29,6 +29,10 @@ module Social
 	      where(post_type: kls.to_s)
 	    end
 	    
+	    def popular_tags
+	      unscoped.includes(:tags).collect {|x| x.tags }.flatten.group_by{|x| x}.sort_by{|k, v| -v.size}.map(&:first)
+	    end
+	    
 	  end
 		
 	end
