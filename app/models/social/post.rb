@@ -17,8 +17,17 @@ module Social
 		end
 		
 	  class << self
-	    
-	    def children; find(:all).collect {|x| x.post }; end
+
+	    def type(cls)
+	      if cls.to_s =~ /(Social::Posts::)/
+	        kls = cls
+	      elsif cls.to_s =~ /(Posts::)/
+	        kls = "Social::#{cls}"
+	      elsif defined?("Posts::#{cls.to_s}")
+	        kls = "Social::Posts::#{cls.to_s}"
+	      end
+	      where(post_type: kls.to_s)
+	    end
 	    
 	  end
 		
